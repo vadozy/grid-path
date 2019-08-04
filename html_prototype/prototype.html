@@ -1,0 +1,155 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <link rel="shortcut icon" href="../public/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Grid Path</title>
+  
+  <link rel="stylesheet" href="../src/index.css">
+
+</head>
+
+<body>
+
+<div class="instructions">
+  <h3>Instructions</h3>
+  <ul>
+    <li>Right-click on a cell to pick <span style="color:green; font-weight: bold;">the start</span></li>
+    <li>Right-click on another cell to pick <span style="color:red; font-weight: bold;">the end</span></li>
+    <li>Left-click on a few more cells to build <span style="color:black; font-weight: bold;">the wall</span></li>
+    <li>Press "Find the Path" to compute the <span style="color:blue; font-weight: bold;">shortest path</span></li>
+    <li>Change the Algo and press "Find the Path" again</li>
+  </ul>
+</div>
+
+<div class="top-buttons-container">
+  <div>
+    <a class="button-01" href="/">Clear All</a>
+    <a class="button-01 disabled" href="/">Find the Path</a>
+  </div>
+
+  <div>
+    <a class="button-01 active" href="/">Algo 1</a>
+    <a class="button-01" href="/">Algo 2</a>
+  </div>
+</div>
+
+<main class="grid">
+  <div class="cell start"></div>
+  <div class="cell path">1</div>
+  <div class="cell path">2</div>
+  <div class="cell path">3</div>
+  <div class="cell path">4</div>
+  <div class="cell path">5</div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell path">6</div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell path">7</div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+
+  <div class="cell wall"></div>
+  <div class="cell wall"></div>
+  <div class="cell wall"></div>
+  <div class="cell wall"></div>
+  <div class="cell wall"></div>
+  <div class="cell path">8</div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell path">10</div>
+  <div class="cell path">9</div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell path">12</div>
+  <div class="cell path">11</div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell path">14</div>
+  <div class="cell path">13</div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+
+  <div class="cell"></div>
+  <div class="cell path">16</div>
+  <div class="cell path">15</div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+
+  <div class="cell path">18</div>
+  <div class="cell path">17</div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  
+  <div class="cell end"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+  <div class="cell"></div>
+
+</main>
+
+</body>
+</html>
