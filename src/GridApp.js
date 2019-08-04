@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Instructions from './components/Instructions';
 import Controls from './components/Controls';
 import Grid from './components/Grid';
+import Feedback from './components/Feedback';
 
 import initCells from './utils/initCells';
 
@@ -9,11 +10,17 @@ import Algo from './model/Algo';
 import Cell from './model/Cell';
 import Location from './model/Location';
 
+// algorithms
+import bfs from './algorithms/bfs'; // breadth first search
+import astar from './algorithms/astar'; // A*
+import { Matrix, nodeToPath } from './algorithms/utils';
+
 class GridApp extends Component {
 
   state = {
     cells: initCells(10),
     algo: Algo.BFS,
+    feedback: false
   }
 
   startLocation = false; // Location object or false
@@ -29,15 +36,20 @@ class GridApp extends Component {
   }
 
   onFindThePathClicked = () => {
+
     if (this.pathRendered) return;
 
-    const shortestPath = [];
+    const algo = this.state.algo === Algo.ASTAR ? astar : bfs;
 
-    shortestPath.push(new Location(0, 1));
-    shortestPath.push(new Location(0, 2));
-    shortestPath.push(new Location(0, 3));
-    shortestPath.push(new Location(1, 3));
-    shortestPath.push(new Location(1, 4));
+    const m = new Matrix(this.state.cells, this.startLocation, this.endLocation);
+    const result = algo(m.startLoc, m.endTest, m.getSuccessors, m.eucledianDistance(this.endLocation));
+    if (result) {
+      this.setState({ feedback: false });
+    } else {
+      this.setState({ feedback: true });
+    }
+
+    const shortestPath = nodeToPath(result);
 
     const cells = this.deepCopy(this.state.cells);
     for (let i = 0; i < shortestPath.length; i++) {
@@ -60,36 +72,13 @@ class GridApp extends Component {
 
     if (rightClick) { // picking start and end
       if (this.endLocation) { // both start and end have been already picked
-        const xOldEnd = this.endLocation.x;
-        const yOldEnd = this.endLocation.y;
-        const xOldStart = this.startLocation.x;
-        const yOldStart = this.startLocation.y;
-        cells[xOldEnd][yOldEnd] = Cell.CLEAN;
-        if (xOldEnd === x && yOldEnd === y) { // right clicked on the previously picked end, clean the end
-          this.endLocation = false;
-        } else if (xOldStart === x && yOldStart === y) { // right clicked on the preiously picked start, clean both, start and end
-          cells[xOldStart][yOldStart] = Cell.CLEAN;
-          this.startLocation = false;
-          this.endLocation = false;
-        } else {
-          cells[x][y] = Cell.END;
-          this.endLocation = new Location(x, y);
-        }
+        this.processRightClick_StartPicked_EndPicked(cells, x, y);
       } else if (this.startLocation) { // only start have been picked so far
-        const xOldStart = this.startLocation.x;
-        const yOldStart = this.startLocation.y;
-        if (xOldStart === x && yOldStart === y) { // right clicked on the previously picked start
-          cells[xOldStart][yOldStart] = Cell.CLEAN;
-          this.startLocation = false;
-        } else {
-          cells[x][y] = Cell.END;
-          this.endLocation = new Location(x, y);
-        }
+        this.processRightClick_StartPicked_EndStillClear(cells, x, y);
       } else { // neither start not end have been picked so far
-        cells[x][y] = Cell.START;
-        this.startLocation = new Location(x, y);
+        this.processRightClick_StartStillclear_EndStillClear(cells, x, y);
       }
-    } else { // another brick in the wall, just toggle
+    } else { // left-click, another brick in the wall, just toggle
       if (cells[x][y] === Cell.WALL) {
         cells[x][y] = Cell.CLEAN;
       } else if (cells[x][y] === Cell.CLEAN) {
@@ -120,9 +109,47 @@ class GridApp extends Component {
       }
     }
     this.pathRendered = false;
-    this.setState({ cells });
+    this.setState({ cells, feedback: false });
   }
   
+  processRightClick_StartStillclear_EndStillClear(cells, x, y) {
+    cells[x][y] = Cell.START;
+    this.startLocation = new Location(x, y);
+  }
+
+  processRightClick_StartPicked_EndStillClear(cells, x, y) {
+    const xOldStart = this.startLocation.x;
+    const yOldStart = this.startLocation.y;
+    if (xOldStart === x && yOldStart === y) { // right clicked on the previously picked start
+      cells[xOldStart][yOldStart] = Cell.CLEAN;
+      this.startLocation = false;
+    }
+    else {
+      cells[x][y] = Cell.END;
+      this.endLocation = new Location(x, y);
+    }
+  }
+
+  processRightClick_StartPicked_EndPicked(cells, x, y) {
+    const xOldEnd = this.endLocation.x;
+    const yOldEnd = this.endLocation.y;
+    const xOldStart = this.startLocation.x;
+    const yOldStart = this.startLocation.y;
+    cells[xOldEnd][yOldEnd] = Cell.CLEAN;
+    if (xOldEnd === x && yOldEnd === y) { // right clicked on the previously picked end, clean the end
+      this.endLocation = false;
+    }
+    else if (xOldStart === x && yOldStart === y) { // right clicked on the preiously picked start, clean both, start and end
+      cells[xOldStart][yOldStart] = Cell.CLEAN;
+      this.startLocation = false;
+      this.endLocation = false;
+    }
+    else {
+      cells[x][y] = Cell.END;
+      this.endLocation = new Location(x, y);
+    }
+  }
+
   render() {
     return <>
       <Instructions />
@@ -137,6 +164,7 @@ class GridApp extends Component {
         gridClicked={this.onGridClicked}
         cells={this.state.cells}
       />
+      <Feedback show={this.state.feedback} />
     </>;
   }
 

@@ -21,7 +21,7 @@ body {
   padding-left: 20px;
   font-size: 0.8em;
   list-style-type: none;
-  border: 2px solid #ddd;
+  border: 1px solid #dbdbdb;
 }
 
 .instructions ul li {
@@ -35,13 +35,12 @@ body {
 }
 
 .button-01 {
-  color: #333 !important;
   text-decoration: none;
   width: 120px;
   text-align: center;
   background: #ffffff;
   padding: 7px 10px;
-  border: 3px solid #ddd !important;
+  border: 2px solid #bcbcbc;
   border-radius: 6px;
   display: inline-block;
   transition: all 0.3s ease 0s;
@@ -49,27 +48,28 @@ body {
 }
 
 .button-01:hover {
-  color: rgb(11, 176, 218) !important;
+  color: rgb(11, 176, 218);
   border-radius: 50px;
-  border-color:  rgb(11, 176, 218) !important;
+  border-color:  rgb(11, 176, 218);
   transition: all 0.3s ease 0s;
 }
 
 .button-01.active {
-  color:  rgb(11, 176, 218) !important;
+  color:  rgb(11, 176, 218);
   border-radius: 50px;
-  border-color:  rgb(11, 176, 218) !important;
+  border-color:  rgb(11, 176, 218);
 }
 
 .button-01.disabled {
-  color: #ddd !important;
-  border-color:  #eee !important;
+  color: #b2b2b2;
+  background-color: #fbfbfb;
+  border-color:  #eee;
   border-radius: 6px;
   cursor: not-allowed;
 }
 
 .grid {
-  margin: 35px auto;
+  margin: 35px auto 25px;
   width: 400px;
   height: 400px;
   display: grid;
@@ -105,4 +105,15 @@ body {
   background-color: blue;
   color: white;
   transition: background-color 1s ease 0s;
+}
+
+.ai-feedback {
+  margin: auto;
+  margin-bottom: 30px;
+  margin-top: -10px;
+  padding: 5px 10px;
+  width: 380px;
+  color: #9a9a9a;
+  font-size: 0.8em;
+  border: 1px solid #eee;
 }

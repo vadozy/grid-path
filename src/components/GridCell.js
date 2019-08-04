@@ -3,15 +3,11 @@ import Cell from '../model/Cell';
 
 class GridCell extends Component {
 
-  state = {
-    dummy: 1
-  }
-
   timer = null;
 
   pathCounter = null;
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps) {
     const delay = this.props.cell;
     if (delay === prevProps.cell) {
       return;
@@ -24,13 +20,7 @@ class GridCell extends Component {
       if (this.timer) {
         clearTimeout(this.timer);
       }
-      this.timer = setTimeout(() => {
-        this.setState(state => {
-          return {
-            dummy: state.dummy + 1
-          };
-        });
-      }, 150 * delay);
+      this.timer = setTimeout(() => this.forceUpdate(), 150 * delay);
     }
   }
 
