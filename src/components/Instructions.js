@@ -1,6 +1,7 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 
-export default () => (
+const Instructions = () => (
 
   <div className="instructions">
   <h3>Mouse Instructions</h3>
@@ -14,3 +15,5 @@ export default () => (
   </div>
 
 );
+
+export default Instructions;

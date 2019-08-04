@@ -4,8 +4,6 @@ import Controls from './components/Controls';
 import Grid from './components/Grid';
 import Feedback from './components/Feedback';
 
-import initCells from './utils/initCells';
-
 import Algo from './model/Algo';
 import Cell from './model/Cell';
 import Location from './model/Location';
@@ -18,9 +16,9 @@ import { Matrix, nodeToPath } from './algorithms/utils';
 class GridApp extends Component {
 
   state = {
-    cells: initCells(10),
+    cells: this.initCells(10),
     algo: Algo.BFS,
-    feedback: false
+    feedback: false,
   }
 
   startLocation = false; // Location object or false
@@ -28,7 +26,7 @@ class GridApp extends Component {
   pathRendered = false;
 
   onClearAllClicked = () => {
-    const cells = initCells(10);
+    const cells = this.initCells(10);
     this.startLocation = false;
     this.endLocation = false;
     this.clearPath();
@@ -148,6 +146,20 @@ class GridApp extends Component {
       cells[x][y] = Cell.END;
       this.endLocation = new Location(x, y);
     }
+  }
+
+  initCells(n) {
+    let ret = []; // 2d array
+  
+    for (let i = 0; i < n; i++) {
+      const row = [];
+      for (let j = 0; j < n; j++) {
+        row.push(Cell.CLEAN);
+      }
+      ret.push(row);
+    }
+  
+    return ret;
   }
 
   render() {

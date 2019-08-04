@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import Cell from '../model/Cell';
 
@@ -11,7 +12,7 @@ class GridCell extends Component {
     const delay = this.props.cell;
     if (delay === prevProps.cell) {
       return;
-    };
+    }
 
     this.pathText = this.props.cell;
 

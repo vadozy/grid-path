@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ show }) => {
+const Feedback = ({ show }) => {
 
   if (!show) return null;
 
@@ -11,7 +11,9 @@ export default ({ show }) => {
     {losingTheGameQuotes[random]}
   </div>
 
-};
+}
+
+export default Feedback
 
 const losingTheGameQuotes = [
   "When you play Bobby, it is not a question if you win or lose. It is a question if you survive. - Boris Spassky",
